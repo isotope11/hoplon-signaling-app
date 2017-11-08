@@ -3,7 +3,7 @@
   "version": "6.6.2-dev",
   "private": true,
   "scripts": {
-    "postinstall": "cd static && ./node_modules/bower/bin/bower install"
+    "postinstall": "cd static && ../node_modules/bower/bin/bower install"
   },
   "dependencies": {
     "express": "~4.12.4",
