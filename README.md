@@ -7,76 +7,15 @@
 
 Copyright © 2013-2016 [Kurento]. Licensed under [Apache 2.0 License].
 
-Kurento tutorial for Node.js
-============================
-Examples on usage of the Kurento Node.js Client.
+kurento-one2one-call
+====================
 
-This project contains a set of simple applications built with JavaScript Kurento
-Client APIs ([kurento-client-js] and [kurento-utils-js]) for [Node.js].
+Kurento Java Tutorial: WebRTC one to one video call.
 
-The source code of this project can be cloned from the [GitHub repository].
+Running this tutorial
+---------------------
 
-Installation instructions
--------------------------
-
-Be sure to have installed [Node.js] in your system:
-
-```bash
-curl -sL https://deb.nodesource.com/setup_4.x | sudo bash -
-sudo apt-get install -y nodejs
-```
-
-It is recommended to update NPM to the latest version:
-
-```bash
-sudo npm install npm -g
-```
-
-
-Install node modules and bower components
-
-```bash
-npm install
-```
-
-Run the application and have fun ...
-
-```bash
-npm start
-```
-
-Parameters
-----------
-
-The Node.js server accept an optional parameter with the URI of the MediaServer
-WebSocket endpoint, being set by default at ws://localhost:8888/kurento. You can
-define its value by using the ```ws_uri``` flag:
-
-```bash
-npm start -- --ws_uri=ws://example.com:8888/kurento
-```
-
-It also accept an optional parameter with the URI of the application server root
-that will serve the overlay image, being by default at https://localhost:8443/.
-You can define its value by using the ```as_uri``` flag:
-
-```bash
-npm start -- --as_uri=https://example.org:8443/
-```
-
-For example, if you would like to start the node server in the localhost using
-the port 8081, then the command is the following:
-
-```bash
-npm start -- --as_uri=https://localhost:8081/
-```
-
-Please notice that the double dash separator (```--```) is [on
-purpose](https://www.npmjs.org/doc/cli/npm-run-script.html#description).
-
-
-Kurento
-=======
+In order to run this tutorial, please read the following [instructions].
 
 What is Kurento
 ---------------
@@ -180,7 +119,4 @@ Before asking for support, please read first the [Kurento Netiquette Guidelines]
 [readthedocs.org]: http://kurento.readthedocs.org/
 [Open API specification]: http://kurento.github.io/doc-kurento/
 [apiary.io]: http://docs.streamoriented.apiary.io/
-[GitHub repository]: https://github.com/Kurento/kurento-tutorial-node
-[kurento-client-js]: https://github.com/Kurento/kurento-client-js
-[kurento-utils-js]: https://github.com/Kurento/kurento-utils-js
-[Node.js]: http://nodejs.org/
+[instructions]: http://www.kurento.org/docs/current/tutorials/node/tutorial-one2one.html
