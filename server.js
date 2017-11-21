@@ -22,19 +22,19 @@ var minimist = require('minimist');
 var url = require('url');
 var kurento = require('kurento-client');
 var fs    = require('fs');
-var https = require('https');
+var http = require('http');
 
 var argv = minimist(process.argv.slice(2), {
   default: {
-      as_uri: "https://localhost:" + process.env.PORT + "/",
+      as_uri: "http://localhost:" + process.env.PORT + "/",
       ws_uri: "ws://adamrobbie.me:8888/kurento"
   }
 });
 
 var options =
 {
-  key:  fs.readFileSync('keys/server.key'),
-  cert: fs.readFileSync('keys/server.crt')
+//   key:  fs.readFileSync('keys/server.key'),
+//   cert: fs.readFileSync('keys/server.crt')
 };
 
 var app = express();
@@ -213,7 +213,7 @@ CallMediaPipeline.prototype.release = function() {
 
 var asUrl = url.parse(argv.as_uri);
 var port = asUrl.port;
-var server = https.createServer(options, app).listen(port, function() {
+var server = http.createServer(app).listen(port, function() {
     console.log('Kurento Tutorial started');
     console.log('Open ' + url.format(asUrl) + ' with a WebRTC capable browser');
 });
