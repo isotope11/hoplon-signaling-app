@@ -26,8 +26,8 @@ var https = require('https');
 
 var argv = minimist(process.argv.slice(2), {
   default: {
-      as_uri: "https://localhost:8443/",
-      ws_uri: "ws://localhost:8888/kurento"
+      as_uri: "https://localhost:" + process.env.PORT + "/",
+      ws_uri: "ws://adamrobbie.me:8888/kurento"
   }
 });
 
@@ -176,6 +176,12 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, calleeId, ws, ca
                             }
                         });
 
+                        pipeline.create('RecorderEndpoint', {uri: "file:///tmp/fileA.webm", stopOnEndOfStream: true }, function(error, recorderEndpoint) {
+                            calleeWebRtcEndpoint.connect(recorderEndpoint);
+                            recorderEndpoint.record();
+                            console.log("starting Recording Session for " + callerId);
+                        });
+                        console.log(pipeline);
                         self.pipeline = pipeline;
                         self.webRtcEndpoint[callerId] = callerWebRtcEndpoint;
                         self.webRtcEndpoint[calleeId] = calleeWebRtcEndpoint;
