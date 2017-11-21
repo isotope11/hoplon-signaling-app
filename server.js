@@ -165,12 +165,14 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, calleeId, ws, ca
 
                     callerWebRtcEndpoint.connect(calleeWebRtcEndpoint, function(error) {
                         if (error) {
+                            console.log("error", error);
                             pipeline.release();
                             return callback(error);
                         }
 
                         calleeWebRtcEndpoint.connect(callerWebRtcEndpoint, function(error) {
                             if (error) {
+                                console.log("error", error);
                                 pipeline.release();
                                 return callback(error);
                             }
@@ -181,7 +183,7 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, calleeId, ws, ca
                             recorderEndpoint.record();
                             console.log("starting Recording Session for " + callerId);
                         });
-                        console.log(pipeline);
+                        console.log("pipeline", pipeline);
                         self.pipeline = pipeline;
                         self.webRtcEndpoint[callerId] = callerWebRtcEndpoint;
                         self.webRtcEndpoint[calleeId] = calleeWebRtcEndpoint;
