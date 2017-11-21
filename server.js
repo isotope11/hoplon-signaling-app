@@ -22,19 +22,19 @@ var minimist = require('minimist');
 var url = require('url');
 var kurento = require('kurento-client');
 var fs    = require('fs');
-var http = require('http');
+var http = require('https');
 
 var argv = minimist(process.argv.slice(2), {
   default: {
-      as_uri: "http://localhost:" + process.env.PORT + "/",
+      as_uri: "https://localhost:" + process.env.PORT + "/",
       ws_uri: "ws://adamrobbie.me:8888/kurento"
   }
 });
 
 var options =
 {
-//   key:  fs.readFileSync('keys/server.key'),
-//   cert: fs.readFileSync('keys/server.crt')
+  key:  fs.readFileSync('keys/server.key'),
+  cert: fs.readFileSync('keys/server.crt')
 };
 
 var app = express();
@@ -178,8 +178,8 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, calleeId, ws, ca
                             }
                         });
 
-                        pipeline.create('RecorderEndpoint', {uri: "file:///tmp/fileA.webm", stopOnEndOfStream: true }, function(error, recorderEndpoint) {
-                            calleeWebRtcEndpoint.connect(recorderEndpoint);
+                        pipeline.create('RecorderEndpoint', {uri: "file:///tmp/fileA.mp4", stopOnEndOfStream: true, mediaProfile:'MP4'}, function(error, recorderEndpoint) {
+                            callerWebRtcEndpoint.connect(recorderEndpoint);
                             recorderEndpoint.record();
                             console.log("starting Recording Session for " + callerId);
                         });
@@ -215,7 +215,7 @@ CallMediaPipeline.prototype.release = function() {
 
 var asUrl = url.parse(argv.as_uri);
 var port = asUrl.port;
-var server = http.createServer(app).listen(port, function() {
+var server = http.createServer(options, app).listen(port, function() {
     console.log('Kurento Tutorial started');
     console.log('Open ' + url.format(asUrl) + ' with a WebRTC capable browser');
 });
