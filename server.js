@@ -109,7 +109,7 @@ function CallMediaPipeline() {
     this.webRtcEndpoint = {};
 }
 
-CallMediaPipeline.prototype.createPipeline = function(callerId, calleeId, ws, callback) {
+CallMediaPipeline.prototype.createPipeline = function(callerId, callerName, calleeId, calleeName, ws, callback) {
     var self = this;
     getKurentoClient(function(error, kurentoClient) {
         if (error) {
@@ -139,7 +139,7 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, calleeId, ws, ca
                     userRegistry.getById(callerId).ws.send(JSON.stringify({
                         id : 'iceCandidate',
                         candidate : candidate,
-                        sender: callerId
+                        sender: callerName
                     }));
                 });
 
@@ -161,7 +161,7 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, calleeId, ws, ca
                         userRegistry.getById(calleeId).ws.send(JSON.stringify({
                             id : 'iceCandidate',
                             candidate : candidate,
-                            sender: calleeId
+                            sender: calleeName
                         }));
                     });
 
@@ -353,7 +353,7 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
         pipelines[caller.id] = pipeline;
         pipelines[callee.id] = pipeline;
 
-        pipeline.createPipeline(caller.id, callee.id, ws, function(error) {
+        pipeline.createPipeline(caller.id, caller.name, callee.id, callee.name, ws, function(error) {
             if (error) {
                 return onError(error, error);
             }
