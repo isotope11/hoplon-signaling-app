@@ -139,7 +139,7 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, callerName, call
                     userRegistry.getById(callerId).ws.send(JSON.stringify({
                         id : 'iceCandidate',
                         candidate : candidate,
-                        sender: callerName
+                        sender: calleeName
                     }));
                 });
 
@@ -161,7 +161,7 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, callerName, call
                         userRegistry.getById(calleeId).ws.send(JSON.stringify({
                             id : 'iceCandidate',
                             candidate : candidate,
-                            sender: calleeName
+                            sender: callerName
                         }));
                     });
 
