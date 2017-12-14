@@ -377,9 +377,9 @@ function incomingCallResponse(calleeId, from, callResponse, calleeSdp, ws) {
 
                     message = {
                         id: 'callResponse',
+                        name: caller.name,
                         response : 'accepted',
                         sdpAnswer: callerSdpAnswer
-                        name: caller.name
                     };
                     caller.sendMessage(message);
                 });
