@@ -138,7 +138,8 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, calleeId, ws, ca
                     var candidate = kurento.getComplexType('IceCandidate')(event.candidate);
                     userRegistry.getById(callerId).ws.send(JSON.stringify({
                         id : 'iceCandidate',
-                        candidate : candidate
+                        candidate : candidate,
+                        sender: callerId
                     }));
                 });
 
@@ -159,7 +160,8 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, calleeId, ws, ca
                         var candidate = kurento.getComplexType('IceCandidate')(event.candidate);
                         userRegistry.getById(calleeId).ws.send(JSON.stringify({
                             id : 'iceCandidate',
-                            candidate : candidate
+                            candidate : candidate,
+                            sender: calleeId
                         }));
                     });
 
