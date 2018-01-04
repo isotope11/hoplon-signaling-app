@@ -266,7 +266,7 @@ wss.on('connection', function(ws) {
         case 'onIceCandidate':
             onIceCandidate(sessionId, message.candidate);
             break;
-
+            
         default:
             ws.send(JSON.stringify({
                 id : 'error',
