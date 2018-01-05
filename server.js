@@ -26,8 +26,8 @@ var http = require('http');
 
 var argv = minimist(process.argv.slice(2), {
   default: {
-      as_uri: "https://localhost:" + process.env.PORT + "/",
-      ws_uri: "ws://adamrobbie.me:8888/kurento"
+      as_uri: "http://localhost:" + process.env.PORT + "/",
+      ws_uri: "ws://18.220.71.156:8888/kurento"
   }
 });
 
@@ -266,7 +266,7 @@ wss.on('connection', function(ws) {
         case 'onIceCandidate':
             onIceCandidate(sessionId, message.candidate);
             break;
-            
+
         default:
             ws.send(JSON.stringify({
                 id : 'error',
