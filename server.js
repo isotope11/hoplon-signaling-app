@@ -180,11 +180,11 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, callerName, call
                             }
                         });
 
-                        pipeline.create('RecorderEndpoint', {uri: "file:///tmp/fileA.mp4", stopOnEndOfStream: true, mediaProfile:'MP4'}, function(error, recorderEndpoint) {
-                            callerWebRtcEndpoint.connect(recorderEndpoint);
-                            recorderEndpoint.record();
-                            console.log("starting Recording Session for " + callerId);
-                        });
+                        // pipeline.create('RecorderEndpoint', {uri: "file:///tmp/fileA.mp4", stopOnEndOfStream: true, mediaProfile:'MP4'}, function(error, recorderEndpoint) {
+                        //     callerWebRtcEndpoint.connect(recorderEndpoint);
+                        //     recorderEndpoint.record();
+                        //     console.log("starting Recording Session for " + callerId);
+                        // });
                         console.log("pipeline", pipeline);
                         self.pipeline = pipeline;
                         self.webRtcEndpoint[callerId] = callerWebRtcEndpoint;

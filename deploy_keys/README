@@ -1,2 +1,0 @@
-These two key files are meant to seperate deploy keys from the github keys. THese two files should be copied to the deploy user .ssh directory to allow pulling down the code repository.
-All the apps on AWS should have a similiar process.

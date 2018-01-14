@@ -1,0 +1,17 @@
+*** Current Deploy recommentations
+
+scp the deploy keys to the ~/.ssh directory
+
+`git clone git@github.com:isotope11/hoplon-signaling-app.git`
+
+Install node and nvm via this:
+https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html
+
+`sudo apt-get update`
+`sudo apt-get install build-essential`
+
+Than you should be able to 
+
+`node install`
+
+

@@ -1,0 +1,17 @@
+These two key files are meant to seperate deploy keys from the github keys. THese two files should be copied to the deploy user .ssh directory to allow pulling down the code repository.
+All the apps on AWS should have a similiar process.
+
+
+Sample Ubuntu 16 upstart script for Signaling
+```
+description "Hoplon Signaling Server"
+author "Adam Robbie"
+
+start on filesystem and started networking
+respawn
+setuid ubuntu
+chdir /home/ubuntu/hoplon-signaling-app  #deployment directory
+env NODE_ENV=production
+env PORT=8888
+exec /home/ubuntu/.nvm/versions/node/v8.6.0/bin/node server.js
+```
