@@ -267,6 +267,10 @@ wss.on('connection', function(ws) {
             onIceCandidate(sessionId, message.candidate);
             break;
 
+        case 'muteAudio':
+            muteCalleeAudio(sessionId);
+            break;
+
         default:
             ws.send(JSON.stringify({
                 id : 'error',
@@ -293,6 +297,21 @@ function getKurentoClient(callback) {
         kurentoClient = _kurentoClient;
         callback(null, kurentoClient);
     });
+}
+
+function muteAudio(sessionId) {
+    if (!pipelines[sessionId]) {
+        return;
+    }
+    var requesterUser = userRegistry.getById(sessionId);
+    var requesteeUser = userRegistry.getByName(requesterUser.peer);
+
+    if (requesteeUser) {
+        var message = {
+            id: 'muteAudio',
+        }
+        requesteeUser.sendMessage(message)
+    }
 }
 
 function stop(sessionId) {
