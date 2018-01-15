@@ -268,7 +268,7 @@ wss.on('connection', function(ws) {
             break;
 
         case 'muteAudio':
-            muteCalleeAudio(sessionId);
+            muteAudio(sessionId);
             break;
 
         default:
