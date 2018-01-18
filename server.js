@@ -23,6 +23,10 @@ var url = require('url');
 var kurento = require('kurento-client');
 var fs    = require('fs');
 var http = require('http');
+//TODO: MOVE ME TO ENV VARS
+var accountSid = 'AC9cec886e2ce68af15befbc1e3e16cdf2';
+var authToken = "438001d789a0e401d0f3a19175b3c12e";
+var client = require('twilio')(accountSid, authToken);
 
 var argv = minimist(process.argv.slice(2), {
   default: {
@@ -31,6 +35,7 @@ var argv = minimist(process.argv.slice(2), {
   }
 });
 
+// TODO: These should be removed eventually as we get SSL from nignx
 var options =
 {
   key:  fs.readFileSync('keys/server.key'),
@@ -185,7 +190,7 @@ CallMediaPipeline.prototype.createPipeline = function(callerId, callerName, call
                         //     recorderEndpoint.record();
                         //     console.log("starting Recording Session for " + callerId);
                         // });
-                        console.log("pipeline", pipeline);
+  
                         self.pipeline = pipeline;
                         self.webRtcEndpoint[callerId] = callerWebRtcEndpoint;
                         self.webRtcEndpoint[calleeId] = calleeWebRtcEndpoint;
@@ -457,7 +462,12 @@ function register(id, name, ws, callback) {
 
     userRegistry.register(new UserSession(id, name, ws));
     try {
-        ws.send(JSON.stringify({id: 'registerResponse', response: 'accepted'}));
+        client.api.accounts(accountSid).tokens
+            .create({})
+            .then(function(token) {
+                console.log(token)
+                ws.send(JSON.stringify({id: 'registerResponse', response: 'accepted', token: token}));
+            });
     } catch(exception) {
         onError(exception);
     }
