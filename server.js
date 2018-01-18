@@ -23,11 +23,6 @@ var url = require('url');
 var kurento = require('kurento-client');
 var fs    = require('fs');
 var http = require('http');
-//TODO: MOVE ME TO ENV VARS
-var accountSid = 'AC9cec886e2ce68af15befbc1e3e16cdf2';
-var authToken = "438001d789a0e401d0f3a19175b3c12e";
-var client = require('twilio')(accountSid, authToken);
-
 var argv = minimist(process.argv.slice(2), {
   default: {
       as_uri: "http://localhost:" + process.env.PORT + "/",
@@ -462,12 +457,7 @@ function register(id, name, ws, callback) {
 
     userRegistry.register(new UserSession(id, name, ws));
     try {
-        client.api.accounts(accountSid).tokens
-            .create({})
-            .then(function(token) {
-                console.log(token)
-                ws.send(JSON.stringify({id: 'registerResponse', response: 'accepted', token: token}));
-            });
+        ws.send(JSON.stringify({id: 'registerResponse', response: 'accepted'}));
     } catch(exception) {
         onError(exception);
     }
