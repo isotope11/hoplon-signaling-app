@@ -252,7 +252,7 @@ wss.on('connection', function(ws) {
             break;
 
         case 'call':
-            call(sessionId, message.to, message.from, message.sdpOffer, iceServers);
+            call(sessionId, message.to, message.from, message.sdpOffer, message.iceServers);
             break;
 
         case 'incomingCallResponse':
