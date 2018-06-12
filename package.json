@@ -5,7 +5,7 @@
   "main": "server.js",
   "author": "Adam Robbie",
   "engines": {
-    "node": "v4.1.0"
+    "node": "v8.6.0"
   },
   "scripts": {
     "start": "node server.js"
